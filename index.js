@@ -67,6 +67,12 @@ Sentinel.prototype.createClient = function(masterName, opts) {
                 resolver(self.endpoints, masterName, function(_err, ip, port) {
                     if (_err) { oldEmit.call(client, 'error', _err); }
                     // Try and reconnect
+
+                    client.connectionOption = {
+                        port: port,
+                        host: ip
+                    };
+
                     client.port = port;
                     client.host = ip;
                 });
